@@ -1,0 +1,20 @@
+{
+  "name": "snake",
+  "version": "1.0.0",
+  "description": "A simple snake game with typescript",
+  "source": "src/index.html",
+  "main": "dist/index.js",
+  "repository": "https://github.com/franktronics/Snake.git",
+  "author": "Franktronics",
+  "license": "MIT",
+  "private": false,
+  "browserslist": "> 0.5%, last 2 versions, not dead",
+  "scripts": {
+    "start": "parcel src/index.html",
+    "build": "parcel build"
+  },
+  "devDependencies": {
+    "@parcel/transformer-sass": "2.5.0",
+    "parcel": "^2.5.0"
+  }
+}
