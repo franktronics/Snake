@@ -1,0 +1,40 @@
+#button{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+
+    main{
+        width: 150px;
+        height: 150px;
+        position: relative;
+    }
+    main>div{
+        position: absolute;
+        width: 40px;
+        height: 40px;
+        border-radius: 50px;
+        background: #fff;
+        color: #110191;
+    }
+    main>div:nth-child(1){
+        top: 0;
+        left: 50%;
+        transform: translateX(-50%);
+    }
+    main>div:nth-child(2){
+        top: 50%;
+        left: 100%;
+        transform: translate(-100%, -50%) rotate(90deg);
+    }
+    main>div:nth-child(3){
+        top: 100%;
+        left: 50%;
+        transform: translate(-50%, -100%) rotate(180deg);
+    }
+    main>div:nth-child(4){
+        top: 50%;
+        left: 0;
+        transform: translateY(-50%) rotate(-90deg);
+    }
+}
