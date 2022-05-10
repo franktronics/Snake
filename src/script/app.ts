@@ -3,6 +3,10 @@ import Snake from "./snake";
 
 const S = new Snake('snake-point', 'food')
 S.play()
+const time = setInterval(() => {
+    S.movesnake()
+    S.buildSnake()
+}, S.speed)
 
 const btnT = document.getElementById('btn-t')
 const btnR = document.getElementById('btn-r')
@@ -28,4 +32,11 @@ btnL?.addEventListener('pointerdown', function(e){
     e.preventDefault()
     e.stopPropagation()
     S.updateDirection('l')
+})
+document.addEventListener('keydown', function(e){
+    e.preventDefault()
+    if(e.code === 'ArrowUp') S.updateDirection('t')
+    if(e.code === 'ArrowDown') S.updateDirection('b')
+    if(e.code === 'ArrowLeft') S.updateDirection('l')
+    if(e.code === 'ArrowRight') S.updateDirection('r')
 })

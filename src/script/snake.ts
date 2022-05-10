@@ -15,6 +15,11 @@ export default class Snake {
     speed: number
     foodPosition: Position
     food: HTMLElement | null
+    lastElt: null | {
+        status: boolean,
+        x: number,
+        y: number
+    }
 
     constructor (idTable: string, idFood: string) {
         this.snake = [
@@ -32,6 +37,7 @@ export default class Snake {
             y: 0
         }
         this.food = document.getElementById(idFood)
+        this.lastElt = null
     }
 
     buildSnake () {
@@ -84,13 +90,13 @@ export default class Snake {
                 }
                 break
         }
-        
         if(this.snake[this.snake.length - 1].x === this.foodPosition.x && this.snake[this.snake.length - 1].y === this.foodPosition.y){
             
-            this.snake.push({
-                x: this.foodPosition.x,
-                y: this.foodPosition.y
-            })
+            this.lastElt = {
+                status: false,
+                x: this.snake[1].x,
+                y: this.snake[1].y
+            }
             this.buildNewFood()
         }
 
@@ -104,6 +110,11 @@ export default class Snake {
         }
         if(this.snake[this.snake.length - 1] !== actualHead){
             makeChain()
+            if(this.lastElt !== null && this.lastElt.status){
+                this.snake.unshift(this.lastElt)
+                this.lastElt = null
+            }
+            if(this.lastElt !== null) this.lastElt.status = true
         }
         if(this.nextDirection !== this.actualDirection) this.actualDirection = this.nextDirection
     }
@@ -124,10 +135,6 @@ export default class Snake {
     }
     play () {
         this.buildNewFood()
-        const time = setInterval(() => {
-            this.movesnake()
-            this.buildSnake()
-        }, this.speed)
     }
 
 
