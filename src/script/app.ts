@@ -1,12 +1,8 @@
 import Food from "./food";
 import Snake from "./snake";
 
-const F = new Food('food')
-const S = new Snake('snake-point')
+const S = new Snake('snake-point', 'food')
 S.play()
-
-F.buildNewFood(S.getSnake())
-S.updateFood(F.getPosition())
 
 const btnT = document.getElementById('btn-t')
 const btnR = document.getElementById('btn-r')

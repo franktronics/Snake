@@ -2,6 +2,10 @@ import { Position } from "../types/food-types"
 import { Direc, Point } from "../types/snake-types"
 import { TABLE_HEIGHT, TABLE_WIDTH } from "./constant"
 
+const getRandomInt = (max: number): number => {
+    return Math.floor(Math.random() * max);
+}
+
 export default class Snake {
     snake: Point[]
     table: HTMLElement | null
@@ -10,8 +14,9 @@ export default class Snake {
     lastPress: number
     speed: number
     foodPosition: Position
+    food: HTMLElement | null
 
-    constructor (idTable: string) {
+    constructor (idTable: string, idFood: string) {
         this.snake = [
             {x: 0, y: 0},
             {x: 1, y: 0},
@@ -26,6 +31,7 @@ export default class Snake {
             x: 0,
             y: 0
         }
+        this.food = document.getElementById(idFood)
     }
 
     buildSnake () {
@@ -78,21 +84,15 @@ export default class Snake {
                 }
                 break
         }
-        if(this.snake[this.snake.length - 1] === this.foodPosition){
-            this.snake.unshift()
-
-        }
-        /*if(
-            (this.snake[this.snake.length - 1].x - this.foodPosition.x === 1 && this.nextDirection === 'l') ||
-            (this.snake[this.snake.length - 1].x - this.foodPosition.x === -1 && this.nextDirection === 'r') ||
-            (this.snake[this.snake.length - 1].y - this.foodPosition.y === 1 && this.nextDirection === 't') ||
-            (this.snake[this.snake.length - 1].y - this.foodPosition.y === -1 && this.nextDirection === 'b')
-        ){
+        
+        if(this.snake[this.snake.length - 1].x === this.foodPosition.x && this.snake[this.snake.length - 1].y === this.foodPosition.y){
+            
             this.snake.push({
                 x: this.foodPosition.x,
                 y: this.foodPosition.y
             })
-        }*/
+            this.buildNewFood()
+        }
 
         const makeChain = (k: number = this.snake.length - 2, value = actualHead) => {
             if(k < 0) return
@@ -123,15 +123,31 @@ export default class Snake {
         }  
     }
     play () {
+        this.buildNewFood()
         const time = setInterval(() => {
             this.movesnake()
             this.buildSnake()
         }, this.speed)
     }
-    getSnake () {
-        return this.snake
+
+
+    buildNewFood () {
+        if(!this.food) return
+        
+        this.generatPosition(this.snake)
+        this.food.style.left = `${this.foodPosition.x * 10}px`
+        this.food.style.top = `${this.foodPosition.y * 10}px`
     }
-    updateFood (food: Position) {
-        this.foodPosition = food
+    generatPosition (snake: Point[]) {
+        let newX = this.foodPosition.x
+        let newY = this.foodPosition.y
+        while(!(this.foodPosition.x !== newX || this.foodPosition.y !== newY) || (snake.indexOf({x: newX, y: newY}) > 0)){
+            newX = getRandomInt(TABLE_WIDTH)
+            newY = getRandomInt(TABLE_HEIGHT)
+        }
+        this.foodPosition = {
+            x: newX,
+            y: newY
+        }
     }
 }
