@@ -1,0 +1,91 @@
+*, :after, :before {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background: #383838;
+}
+
+#block-snake {
+  width: 100%;
+  justify-content: center;
+  display: flex;
+}
+
+#food {
+  width: 10px;
+  height: 10px;
+  background: #dc143c;
+  border: 1px solid #1c1c1c;
+  position: absolute;
+}
+
+.point {
+  width: 10px;
+  height: 10px;
+  background: #fff;
+  border: 1px solid #1c1c1c;
+  position: absolute;
+}
+
+.snake-container {
+  width: 300px;
+  height: 400px;
+  background: #1c1c1c;
+  position: relative;
+}
+
+.snake-container main {
+  position: absolute;
+  inset: 0;
+}
+
+#button {
+  width: 100%;
+  justify-content: center;
+  margin-top: 20px;
+  display: flex;
+}
+
+#button main {
+  width: 150px;
+  height: 150px;
+  position: relative;
+}
+
+#button main > div {
+  width: 40px;
+  height: 40px;
+  color: #110191;
+  background: #fff;
+  border-radius: 50px;
+  position: absolute;
+}
+
+#button main > div:nth-child(1) {
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+#button main > div:nth-child(2) {
+  top: 50%;
+  left: 100%;
+  transform: translate(-100%, -50%)rotate(90deg);
+}
+
+#button main > div:nth-child(3) {
+  top: 100%;
+  left: 50%;
+  transform: translate(-50%, -100%)rotate(180deg);
+}
+
+#button main > div:nth-child(4) {
+  top: 50%;
+  left: 0;
+  transform: translateY(-50%)rotate(-90deg);
+}
+
+/*# sourceMappingURL=index.be84b973.css.map */
