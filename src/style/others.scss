@@ -1,0 +1,30 @@
+#inscription {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 100;
+    background: var(--color3);
+
+    display: none;
+    justify-content: center;
+    padding-top: 50px;
+
+    form label{
+        font-size: 18px;
+        color: #fff;
+    }
+    form>div {
+        margin-top: 10px;
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        height: 50px;
+
+        button{
+            border-top-left-radius: 0px;
+            border-bottom-left-radius: 0px;
+        }
+    }
+}

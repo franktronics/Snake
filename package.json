@@ -14,10 +14,14 @@
   },
   "devDependencies": {
     "@parcel/transformer-sass": "2.5.0",
-    "parcel": "^2.5.0"
+    "buffer": "^6.0.3",
+    "parcel": "^2.5.0",
+    "process": "^0.11.10"
   },
   "dependencies": {
     "@swc/helpers": "^0.3.13",
-    "axios": "^0.27.2"
+    "@types/js-cookie": "^3.0.2",
+    "axios": "^0.27.2",
+    "js-cookie": "^3.0.1"
   }
 }

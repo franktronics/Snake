@@ -10,10 +10,12 @@
     --font1: 'Raleway', sans-serif;
     --font2: 'Poppins', sans-serif;
     --color1: #4dc1f9;
-    --color2: rgb(17, 85, 204)
+    --color2: rgb(17, 85, 204);
+    --color3: #383838;
 }
 body {
-    background: #383838;
+    background: var(--color3);
+    position: relative;
 }
 #score{
     width: 100%;
@@ -42,6 +44,18 @@ body {
     min-width: 100px;
     color: #fff;
     font-size: 18;
-    margin-top: 50px;
     cursor: pointer;
+}
+.input{
+    border: none;
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+    height: 50px;
+    padding-inline: 10px;
+    min-width: 200px;
+    outline: none;
+
+    &:focus{
+        border: none;
+    }
 }
