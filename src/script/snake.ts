@@ -11,7 +11,6 @@ export default class Snake {
     table: HTMLElement | null
     nextDirection: Direc
     actualDirection: Direc
-    lastPress: number
     speed: number
     foodPosition: Position
     food: HTMLElement | null
@@ -20,6 +19,8 @@ export default class Snake {
         x: number,
         y: number
     }
+    score: number
+    status: boolean
 
     constructor (idTable: string, idFood: string) {
         this.snake = [
@@ -30,7 +31,6 @@ export default class Snake {
         this.table = document.getElementById(idTable)
         this.actualDirection = 'r'
         this.nextDirection = 'r'
-        this.lastPress = Date.now()
         this.speed = 200
         this.foodPosition = {
             x: 0,
@@ -38,6 +38,8 @@ export default class Snake {
         }
         this.food = document.getElementById(idFood)
         this.lastElt = null
+        this.score = 0
+        this.status = true
     }
 
     buildSnake () {
@@ -58,36 +60,60 @@ export default class Snake {
 
         switch(this.actualDirection){
             case 't':
-                if(actualHead.y > 0){
-                    this.snake[this.snake.length - 1] = {
+                const a = () => {
+                    const pos = {
                         x: actualHead.x,
                         y: actualHead.y - 1
                     }
-                } 
+                    if(actualHead.y > 0){
+                        this.snake[this.snake.length - 1] = pos
+                    }else {
+                        this.verifPosition(pos)
+                    }
+                }
+                a()
                 break
             case 'r':
-                if(actualHead.x < TABLE_WIDTH - 1){
-                    this.snake[this.snake.length - 1] = {
+                const b = () => {
+                    const pos = {
                         x: actualHead.x + 1,
                         y: actualHead.y
                     }
+                    if(actualHead.x < TABLE_WIDTH - 1){
+                        this.snake[this.snake.length - 1] = pos
+                    }else{
+                        this.verifPosition(pos)
+                    }
                 }
+                b()
                 break;
             case 'b':
-                if(actualHead.y < TABLE_HEIGHT - 1){
-                    this.snake[this.snake.length - 1] = {
+                const c = () => {
+                    const pos = {
                         x: actualHead.x,
                         y: actualHead.y + 1
                     }
-                } 
+                    if(actualHead.y < TABLE_HEIGHT - 1){
+                        this.snake[this.snake.length - 1] = pos
+                    }else {
+                        this.verifPosition(pos)
+                    }
+                }
+                c() 
                 break
             case 'l':
-                if(actualHead.x > 0){
-                    this.snake[this.snake.length - 1] = {
+                const d = () => {
+                    const pos = {
                         x: actualHead.x - 1,
                         y: actualHead.y
                     }
+                    if(actualHead.x > 0){
+                        this.snake[this.snake.length - 1] = pos
+                    }else {
+                        this.verifPosition(pos)
+                    }
                 }
+                d()
                 break
         }
         if(this.snake[this.snake.length - 1].x === this.foodPosition.x && this.snake[this.snake.length - 1].y === this.foodPosition.y){
@@ -97,6 +123,8 @@ export default class Snake {
                 x: this.snake[1].x,
                 y: this.snake[1].y
             }
+            window.navigator.vibrate(400);
+            this.updateScore()
             this.buildNewFood()
         }
 
@@ -128,10 +156,7 @@ export default class Snake {
             (d === 'r' && this.actualDirection === 'l')
         ) return
         
-        if(Date.now() - this.lastPress > this.speed){
-            this.nextDirection = d
-            this.lastPress = Date.now()
-        }  
+        this.nextDirection = d
     }
     play () {
         this.buildNewFood()
@@ -155,6 +180,24 @@ export default class Snake {
         this.foodPosition = {
             x: newX,
             y: newY
+        }
+    }
+    setSpeed (speed: number) {
+        this.speed = speed
+    }
+    updateScore () {
+        const score = document.getElementById('snake-score') as HTMLSpanElement
+        const s = (this.snake.length - 2) * 5
+        this.score = s
+        score.innerHTML = `${s}`
+    }
+    verifPosition (pos: Position) {
+        if(pos.x > TABLE_WIDTH ||
+           pos.x < 0 ||
+           pos.y > TABLE_HEIGHT ||
+           pos.y < 0
+        ){
+            this.status = false
         }
     }
 }

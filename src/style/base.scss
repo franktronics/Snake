@@ -1,8 +1,31 @@
+@import url('https://fonts.googleapis.com/css2?family=Raleway:wght@200;300&display=swap');
+
 *, *::after, *::before {
     padding: 0;
     margin: 0;
     box-sizing: border-box;
 }
+:root{
+    --font1: 'Raleway', sans-serif;
+}
 body {
     background: #383838;
+}
+#score{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+
+    &>div{
+        width: 300px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding-block: 10px;
+    }
+    &>div>span{
+        color: #fff;
+        font-family: var(--font1);
+        font-size: 18px;
+    }
 }
