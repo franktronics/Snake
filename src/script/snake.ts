@@ -192,9 +192,9 @@ export default class Snake {
         score.innerHTML = `${s}`
     }
     verifPosition (pos: Position) {
-        if(pos.x > TABLE_WIDTH ||
+        if(pos.x > TABLE_WIDTH - 1 ||
            pos.x < 0 ||
-           pos.y > TABLE_HEIGHT ||
+           pos.y > TABLE_HEIGHT - 1 ||
            pos.y < 0
         ){
             this.status = false
