@@ -3,16 +3,6 @@ import Snake from "./snake";
 
 const S = new Snake('snake-point', 'food')
 S.setSpeed(200) //75 120 200
-S.play()
-const time = setInterval(() => {
-    S.movesnake()
-    S.buildSnake()
-    const status = S.status
-
-    if(!status) {
-        clearInterval(time)
-    }
-}, S.speed)
 
 const vibration = () => {
     window.navigator.vibrate(50);
@@ -59,3 +49,18 @@ document.addEventListener('keydown', function(e){
     if(e.code === 'ArrowLeft') S.updateDirection('l')
     if(e.code === 'ArrowRight') S.updateDirection('r')
 })
+
+///////////////
+const btnPlay = document.getElementById('btn-play')
+const btnReplay = document.getElementById('btn-replay')
+
+S.play()
+const time = setInterval(() => {
+    S.movesnake()
+    S.buildSnake()
+    const status = S.status
+
+    if(!status) {
+        clearInterval(time)
+    }
+}, S.speed)

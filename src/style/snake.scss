@@ -4,22 +4,22 @@
     width: 100%;
 }
 #food{
-    width: 10px;
-    height: 10px;
+    width: 15px;
+    height: 15px;
     position: absolute;
     border: 1px solid #1c1c1c;
     background: crimson;
 }
 .point{
-    width: 10px;
-    height: 10px;
+    width: 15px;
+    height: 15px;
     position: absolute;
     background: #fff;
     border: 1px solid #1c1c1c;
 }
 .snake-container{
     width: 300px;
-    height: 400px;
+    height: 375px;
     background: #1c1c1c;
     position: relative;
 
@@ -29,5 +29,69 @@
         bottom: 0;
         left: 0;
         right: 0;
+    }
+}
+
+#endgame{
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    display: none;
+    border-radius: 5px;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    padding-top: 30px;
+    background: var(--color1);
+
+    &>div{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+        span{
+            color: #fff;
+            font-size: 20px;
+            font-family: var(--font1);
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+    }
+    &>div:nth-child(1) img{
+        width: 70px;
+    }
+    &>div:nth-child(2) img{
+        width: 70px;
+    }
+}
+
+#home-screen{
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    display: flex;
+    border-radius: 5px;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    padding-top: 30px;
+    background: var(--color1);
+
+    h2, h3{
+        color: #fff;
+    }
+    h2{
+        font-family: var(--font1);
+        font-size: 30px;
+    }
+    h3{
+        font-family: var(--font2);
+        font-size: 18px;
+        opacity: .8;
+        margin-top: 20px;
     }
 }

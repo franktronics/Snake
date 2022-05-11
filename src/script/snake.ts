@@ -49,8 +49,8 @@ export default class Snake {
         this.snake.forEach((pt: Point, k: number) => {
             const block = document.createElement('div')
             block.classList.add('point')
-            block.style.left = `${pt.x * 10}px`
-            block.style.top = `${pt.y * 10}px`
+            block.style.left = `${pt.x * 15}px`
+            block.style.top = `${pt.y * 15}px`
 
             this.table?.insertAdjacentElement('beforeend', block)
         })
@@ -167,8 +167,8 @@ export default class Snake {
         if(!this.food) return
         
         this.generatPosition(this.snake)
-        this.food.style.left = `${this.foodPosition.x * 10}px`
-        this.food.style.top = `${this.foodPosition.y * 10}px`
+        this.food.style.left = `${this.foodPosition.x * 15}px`
+        this.food.style.top = `${this.foodPosition.y * 15}px`
     }
     generatPosition (snake: Point[]) {
         let newX = this.foodPosition.x
