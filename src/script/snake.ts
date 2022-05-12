@@ -1,6 +1,7 @@
 import { Position } from "../types/food-types"
 import { Direc, Point } from "../types/snake-types"
 import { TABLE_HEIGHT, TABLE_WIDTH } from "./constant"
+import { verifTable } from "./other";
 
 const getRandomInt = (max: number): number => {
     return Math.floor(Math.random() * max);
@@ -78,6 +79,7 @@ export default class Snake {
                         x: actualHead.x,
                         y: actualHead.y - 1
                     }
+                    this.verifCollision(pos)
                     if(actualHead.y > 0){
                         this.snake[this.snake.length - 1] = pos
                     }else {
@@ -92,6 +94,7 @@ export default class Snake {
                         x: actualHead.x + 1,
                         y: actualHead.y
                     }
+                    this.verifCollision(pos)
                     if(actualHead.x < TABLE_WIDTH - 1){
                         this.snake[this.snake.length - 1] = pos
                     }else{
@@ -106,6 +109,7 @@ export default class Snake {
                         x: actualHead.x,
                         y: actualHead.y + 1
                     }
+                    this.verifCollision(pos)
                     if(actualHead.y < TABLE_HEIGHT - 1){
                         this.snake[this.snake.length - 1] = pos
                     }else {
@@ -120,6 +124,7 @@ export default class Snake {
                         x: actualHead.x - 1,
                         y: actualHead.y
                     }
+                    this.verifCollision(pos)
                     if(actualHead.x > 0){
                         this.snake[this.snake.length - 1] = pos
                     }else {
@@ -212,5 +217,18 @@ export default class Snake {
         ){
             this.status = false
         }
+    }
+    verifCollision (pos: Position) {
+        this.snake.forEach(s => {
+            if(s.x === pos.x && s.y === pos.y) this.status = false
+        })
+        /*if(verifTable(this.snake, {x: pos.x, y: pos.y})){
+            this.status = false
+        }*/
+    }
+    setNiveau (n: string) {
+        if(n === 'facile') this.speed = 200
+        if(n === 'moyen') this.speed = 120
+        if(n === 'difficile') this.speed = 75
     }
 }

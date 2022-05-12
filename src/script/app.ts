@@ -124,7 +124,10 @@ const btnReplay = document.getElementById('btn-replay')
 const play = () => {
     S.clear()
     S.play()
-    const time = setInterval(() => {
+    const niveau = document.getElementById('niveau') as HTMLSelectElement
+    S.setNiveau(niveau.value)
+    
+    const time = window.setInterval(() => {
         S.movesnake()
         S.buildSnake()
         const status = S.status
@@ -132,15 +135,19 @@ const play = () => {
         scoreContainer.innerHTML = S.score.toString()
 
         if(!status) {
-            clearInterval(time)
+            window.navigator.vibrate(500);
+            window.clearInterval(time)
             const endScreen = document.getElementById('endgame')
             endScreen!.style.display = 'flex'
             const endScore = document.getElementById('end-score')
             endScore!.innerHTML = S.score.toString()
+
             btnReplay?.addEventListener('click', function(e){
                 e.preventDefault()
                 e.stopPropagation()
                 document.getElementById('endgame')!.style.display = 'none'
+                window.location.assign('/')
+                S.clear()
                 play()
             })
         }

@@ -1,3 +1,5 @@
+import { table } from "console";
+
 export function codeGenerator(o: any) {
     var a = 10,
         b = 'abcdefghijklmnopqrstuvwxyz',
@@ -23,4 +25,13 @@ export function codeGenerator(o: any) {
       c += e[Math.floor(Math.random() * e.length)];
     }
     return c;
+}
+
+export function verifTable<T>(tab: T[], elt: T){
+  let status = false
+  tab.forEach(el => {
+    if(el == elt) status = true
+    return true
+  })
+  return status
 }

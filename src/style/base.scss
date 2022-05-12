@@ -59,3 +59,13 @@ body {
         border: none;
     }
 }
+
+.select{
+    border: none;
+    height: 50px;
+    padding-inline: 10px;
+    font-family: var(--font2);
+    border-radius: 5px;
+    margin-top: 10px;
+    min-width: 100px;
+}
