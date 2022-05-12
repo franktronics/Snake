@@ -145,9 +145,9 @@ const play = () => {
             btnReplay?.addEventListener('click', function(e){
                 e.preventDefault()
                 e.stopPropagation()
-                document.getElementById('endgame')!.style.display = 'none'
-                window.location.assign('/')
+                //document.getElementById('endgame')!.style.display = 'none'
                 S.clear()
+                window.location.assign('/')
                 play()
             })
         }
