@@ -42,6 +42,19 @@ export default class Snake {
         this.status = true
     }
 
+    clear () {
+        this.snake = [
+            {x: 0, y: 0},
+            {x: 1, y: 0},
+            {x: 2, y: 0}
+        ]
+        this.actualDirection = 'r'
+        this.nextDirection = 'r'
+        this.lastElt = null
+        this.score = 0
+        this.status = true
+        this.buildNewFood()
+    }
     buildSnake () {
         if(!this.table) return
         

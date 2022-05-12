@@ -52,10 +52,9 @@ document.addEventListener('keydown', function(e){
     if(e.code === 'ArrowRight') S.updateDirection('r')
 })
 
-///////////////
-const btnPlay = document.getElementById('btn-play')
-const btnReplay = document.getElementById('btn-replay')
+////////////////*
 
+/*
 const url = process.env.BACK_END
 
 let name = Cookies.get('name') || null
@@ -84,8 +83,9 @@ if(!name || !token){
         })
         let config = {
             headers: {
-                'Access-Control-Allow-Origin': '*',
-                'Access-Control-Allow-Methods':'GET,PUT,POST,DELETE,PATCH,OPTIONS',
+                "Access-Control-Allow-Origin": "*",
+                "Access-Control-Allow-Methods": "*",
+                "Access-Control-Allow-Headers": "'Access-Control-Allow-Headers: Origin, Content-Type, X-Auth-Token'",
             }
         }
         axios.post(url+ 'signin', {name: valueName, token: token}, config)
@@ -116,14 +116,40 @@ if(!name || !token){
             
         })
 }
+*/
 
-S.play()
-const time = setInterval(() => {
-    S.movesnake()
-    S.buildSnake()
-    const status = S.status
+const btnPlay = document.getElementById('btn-play')
+const btnReplay = document.getElementById('btn-replay')
 
-    if(!status) {
-        clearInterval(time)
-    }
-}, S.speed)
+const play = () => {
+    S.clear()
+    S.play()
+    const time = setInterval(() => {
+        S.movesnake()
+        S.buildSnake()
+        const status = S.status
+        const scoreContainer = document.getElementById('snake-score') as HTMLElement
+        scoreContainer.innerHTML = S.score.toString()
+
+        if(!status) {
+            clearInterval(time)
+            const endScreen = document.getElementById('endgame')
+            endScreen!.style.display = 'flex'
+            const endScore = document.getElementById('end-score')
+            endScore!.innerHTML = S.score.toString()
+            btnReplay?.addEventListener('click', function(e){
+                e.preventDefault()
+                e.stopPropagation()
+                document.getElementById('endgame')!.style.display = 'none'
+                play()
+            })
+        }
+    }, S.speed)
+}
+
+btnPlay?.addEventListener('click', function(e){
+    e.preventDefault()
+    e.stopPropagation()
+    document.getElementById('home-screen')!.style.display = 'none'
+    play()
+})
