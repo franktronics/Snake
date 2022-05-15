@@ -191,9 +191,15 @@ export default class Snake {
     generatPosition (snake: Point[]) {
         let newX = this.foodPosition.x
         let newY = this.foodPosition.y
-        while(!(this.foodPosition.x !== newX || this.foodPosition.y !== newY) || (snake.indexOf({x: newX, y: newY}) > 0)){
+        let s = true
+
+        while(!(this.foodPosition.x !== newX || this.foodPosition.y !== newY) || s){
             newX = getRandomInt(TABLE_WIDTH)
             newY = getRandomInt(TABLE_HEIGHT)
+            s = false
+            this.snake.forEach(s => {
+                if(s.x === newX && s.y === newY) s = true
+            })
         }
         this.foodPosition = {
             x: newX,
